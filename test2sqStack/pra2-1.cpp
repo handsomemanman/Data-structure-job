@@ -2,26 +2,24 @@
 #include"SqStack.cpp"
 #include "string.h"
 
-/*°Ñ10½øÖÆ×ª»»³É¶ÔÓ¦µÄN½øÖÆ,×ª»»½á¹¹´æÈëµ½SÖĞ*/
+/*æŠŠ10è¿›åˆ¶è½¬æ¢æˆå¯¹åº”çš„Nè¿›åˆ¶,è½¬æ¢ç»“æ„å­˜å…¥åˆ°Sä¸­*/
 int Convert(long D,char N,Sqstack *S) {
 	int bit;
 	if(N<2||N>36) return 0;
-	/*ÒÔÏÂÌîĞ´ÕıÈ·µÄ³ÌĞò¶Î*/
+	/*ä»¥ä¸‹å¡«å†™æ­£ç¡®çš„ç¨‹åºæ®µ*/
 	Initstack(S);
-	while(D>=N) {
+	while(D!=0) {
 		bit= D % N;
 		D /= N;
 		Push(S,&bit);
 	}
-	bit=D;
-	Push(S,&bit);
-	/*ÌîĞ´½áÊø*/
+	/*å¡«å†™ç»“æŸ*/
 	return 1;
 }
 
-/*À¨ºÅÆ¥Åä³ÌĞò,ÕıÈ·Æ¥Åä,·µ»Ø1,²»ÄÜÕıÈ·Æ¥Åä,·µ»Ø0*/
+/*æ‹¬å·åŒ¹é…ç¨‹åº,æ­£ç¡®åŒ¹é…,è¿”å›1,ä¸èƒ½æ­£ç¡®åŒ¹é…,è¿”å›0*/
 int Bracket(char *str) {
-	/*ÒÔÏÂÌîĞ´ÕıÈ·µÄ³ÌĞò¶Î*/
+	/*ä»¥ä¸‹å¡«å†™æ­£ç¡®çš„ç¨‹åºæ®µ*/
 	Sqstack S;
 	Initstack(&S);
 	int e=1;
@@ -41,10 +39,10 @@ int Bracket(char *str) {
 		return 1;
 	else
 		return 0;
-	/*ÌîĞ´½áÊø*/
+	/*å¡«å†™ç»“æŸ*/
 }
 
-/*ÒÔÏÂÎªBracket1º¯Êı,¿ÉÒÔ´¦ÀíÈıÖÖÀ¨ºÅÆ¥Åä,Çë²¹³äÍêÕû³ÌĞò*/
+/*ä»¥ä¸‹ä¸ºBracket1å‡½æ•°,å¯ä»¥å¤„ç†ä¸‰ç§æ‹¬å·åŒ¹é…,è¯·è¡¥å……å®Œæ•´ç¨‹åº*/
 int Bracket1(char *str ) {
 	Sqstack S;
 	Initstack(&S);
@@ -91,14 +89,14 @@ int Bracket1(char *str ) {
 
 }
 
-/*ÒÔÏÂÎª¶ÔConvertµÄ×Ô¶¯»¯²âÊÔº¯Êı,Çë²¹³äÍêÕû³ÌĞò*/
+/*ä»¥ä¸‹ä¸ºå¯¹Convertçš„è‡ªåŠ¨åŒ–æµ‹è¯•å‡½æ•°,è¯·è¡¥å……å®Œæ•´ç¨‹åº*/
 void ConvertTest(Sqstack *S) {
 
 
 }
 
 
-/*²Ëµ¥*/
+/*èœå•*/
 char Displaymenu( ) {
 	printf("\n1.Test Convert Decimal to N\n");
 	printf("2.Test bracket matching problem\n");
@@ -123,18 +121,22 @@ int main() {
 			scanf("%d",&N);
 			if(Convert(x,N,&S)) {
 				printf("Result of convert:\n");
-				/*ÒÔÏÂ³ÌĞòÊä³öConvertµÄ×ª»»½á¹û£¬Çë²¹³äÍêÕû*/
+				/*ä»¥ä¸‹ç¨‹åºè¾“å‡ºConvertçš„è½¬æ¢ç»“æœï¼Œè¯·è¡¥å……å®Œæ•´*/
 				while(!StackEmpty(&S)) {
 					Pop(&S,&e);
-					printf("%d",e);
+					if(e<10)
+						printf("%d",e);
+					else {
+						printf("%c",e/10+'A');
+					}
 				}
-				/*²¹³ä½áÊø*/
+				/*è¡¥å……ç»“æŸ*/
 			}
 		} else if(ch=='2') {
 			printf("Please Enter a string:\n");
 			fflush(stdin);
 			fgets(str,256,stdin);
-			/*Çë°ÑÏÂÃæ¿Õ¸ñÖĞµÄ 1 ¸ÄÎªÕıÈ·µÄ¹Ø±í±í´ïÊ½*/
+			/*è¯·æŠŠä¸‹é¢ç©ºæ ¼ä¸­çš„ 1 æ”¹ä¸ºæ­£ç¡®çš„å…³è¡¨è¡¨è¾¾å¼*/
 			if( Bracket1(str)==1 )   {
 				printf("String \" ");
 				printf("%s\" is right matching!\n",str);
