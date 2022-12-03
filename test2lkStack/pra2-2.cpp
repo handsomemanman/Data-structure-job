@@ -3,9 +3,9 @@
 #include "string.h"
 using namespace std;
 
-/*°Ñ10½øÖÆ×ª»»³É¶ÔÓ¦µÄ N ½øÖÆ,×ª»»½á¹¹´æÈëµ½SÖĞ*/
+/*æŠŠ10è¿›åˆ¶è½¬æ¢æˆå¯¹åº”çš„ N è¿›åˆ¶,è½¬æ¢ç»“æ„å­˜å…¥åˆ°Sä¸­*/
 int Convert(long D,char N,LkStack *S) {
-	/*ÒÔÏÂÌîĞ´ÕıÈ·µÄ³ÌĞò¶Î*/
+	/*ä»¥ä¸‹å¡«å†™æ­£ç¡®çš„ç¨‹åºæ®µ*/
 	long d = D;
 	int *e;
 	while(d>=N) {
@@ -16,13 +16,13 @@ int Convert(long D,char N,LkStack *S) {
 	*e=d;
 	Push(S, e);
 
-	/*ÌîĞ´½áÊø*/
+	/*å¡«å†™ç»“æŸ*/
 	return 1;
 }
 
-/*À¨ºÅÆ¥Åä³ÌĞò,ÕıÈ·Æ¥Åä,·µ»Ø1,²»ÄÜÕıÈ·Æ¥Åä,·µ»Ø0*/
+/*æ‹¬å·åŒ¹é…ç¨‹åº,æ­£ç¡®åŒ¹é…,è¿”å›1,ä¸èƒ½æ­£ç¡®åŒ¹é…,è¿”å›0*/
 int Bracket(char *str) {
-	/*ÒÔÏÂÌîĞ´ÕıÈ·µÄ³ÌĞò¶Î*/
+	/*ä»¥ä¸‹å¡«å†™æ­£ç¡®çš„ç¨‹åºæ®µ*/
 	LkStack S;
 	
 	int *e;
@@ -44,10 +44,10 @@ int Bracket(char *str) {
 	else
 		return 0;
 
-	/*ÌîĞ´½áÊø*/
+	/*å¡«å†™ç»“æŸ*/
 }
 
-/*²Ëµ¥*/
+/*èœå•*/
 char Displaymenu( ) {
 	printf("\n1.Test Convert Decimal to N\n");
 	printf("2.Test bracket matching problem\n");
@@ -72,7 +72,11 @@ int main( ) {
 				printf("Result of convert:\n");
 				while(!StackEmpty(&S)) {
 					Pop(&S,&e);
-					printf("%d",e);
+					if(e<10)
+						printf("%d",e);
+					else {
+						printf("%c",e/10+'A');
+					}
 				}
 			}
 		} else if(ch=='2') {
